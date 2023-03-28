@@ -4,23 +4,52 @@ const addPostForm = document.querySelector(".add-post-form");
 const title = document.getElementById("title-value");
 const body = document.getElementById("body-value");
 const publish = document.querySelector(".btn");
-let output = "";
 
 const showPost = (posts) => {
   posts.forEach((post) => {
-    output += `
-        <div class="card mt-4 col-md-6">
-          <div class="card-body">
-            <h5 class="card-title">${post.title}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">${post.date}</h6>
-            <p class="card-text">${post.post}</p>
-            <a href="#" class="card-link" id="edit-btn">Edit</a>
-            <a href="#" class="card-link" id="delete-btn">Delete</a>
-          </div>
-        </div>
-        `;
+    let div = document.createElement("div");
+    div.className = "card mt-4 col-md-6";
+
+    postsList.appendChild(div);
+
+    let div2 = document.createElement("div");
+    div2.className = "card-body";
+    div2.setAttribute("data-id", `${post.id}`);
+    div.appendChild(div2);
+
+    let h5 = document.createElement("h5");
+    h5.className = "card-title";
+    h5.innerText = `${post.title}`;
+    div2.appendChild(h5);
+
+    let h6 = document.createElement("h6");
+    h6.className = "card-subtitle mb-2 text-muted";
+    h6.innerText = `${post.date}`;
+    div2.appendChild(h6);
+
+    let p = document.createElement("p");
+    p.className = "card-text";
+    p.innerText = `${post.post}`;
+    div2.appendChild(p);
+
+    let edit = document.createElement("a");
+    let link = document.createTextNode("Edit");
+    edit.appendChild(link);
+
+    edit.href = "#";
+    edit.className = "card-link";
+    edit.setAttribute("id", "edit-btn");
+    div2.appendChild(edit);
+
+    let del = document.createElement("a");
+    let links = document.createTextNode("Delete");
+    del.appendChild(links);
+
+    del.href = "#";
+    del.className = "card-link";
+    del.setAttribute("id", "delete-btn");
+    div2.appendChild(del);
   });
-  postsList.innerHTML = output;
 };
 
 fetch(url)
@@ -55,5 +84,8 @@ addPostForm.addEventListener("submit", (e) => {
       const dataArray = [];
       dataArray.push(data);
       showPost(dataArray);
+      location.reload();
     });
 });
+
+// DELETE
