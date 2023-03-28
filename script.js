@@ -89,3 +89,24 @@ addPostForm.addEventListener("submit", (e) => {
 });
 
 // DELETE
+
+postsList.addEventListener("click", (e) => {
+  e.preventDefault;
+
+  let editBtn = e.target.id == "edit-btn";
+  let delBtn = e.target.id == "delete-btn";
+
+  let id = e.target.parentElement.dataset.id;
+
+  if (delBtn) {
+    fetch(`${url}/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then(() => {
+        location.reload();
+      });
+  }
+});
