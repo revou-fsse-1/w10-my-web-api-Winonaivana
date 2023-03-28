@@ -13,9 +13,7 @@ const showPost = (posts) => {
           <div class="card-body">
             <h5 class="card-title">${post.title}</h5>
             <h6 class="card-subtitle mb-2 text-muted">${post.date}</h6>
-            <p class="card-text">
-              ${post.post}
-            </p>
+            <p class="card-text">${post.post}</p>
             <a href="#" class="card-link" id="edit-btn">Edit</a>
             <a href="#" class="card-link" id="delete-btn">Delete</a>
           </div>
@@ -47,7 +45,7 @@ addPostForm.addEventListener("submit", (e) => {
     },
     body: JSON.stringify({
       title: title.value,
-      body: body.value,
+      post: body.value,
     }),
   })
     .then((res) => {
