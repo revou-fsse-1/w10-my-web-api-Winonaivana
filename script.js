@@ -109,4 +109,36 @@ postsList.addEventListener("click", (e) => {
         location.reload();
       });
   }
+
+  // PUT
+
+  if (editBtn) {
+    const parent = e.target.parentElement;
+    let titleContent = parent.querySelector(".card-title").textContent;
+    let bodyContent = parent.querySelector(".card-text").textContent;
+
+    title.value = titleContent;
+    body.value = bodyContent;
+  }
+
+  publish.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title.value,
+        post: body.value,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then(() => {
+        location.reload();
+      });
+  });
 });
