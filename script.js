@@ -8,6 +8,9 @@ const publish = document.getElementById("publishbtn");
 const edit = document.getElementById("editbtn");
 const spinner = document.querySelector(".spinner");
 const names = document.getElementById("name-value");
+const nameBox = document.querySelector(".namebox");
+
+nameBox.classList.remove("visually-hidden");
 
 const showPost = (posts) => {
   posts.forEach((post) => {
@@ -136,6 +139,7 @@ postsList.addEventListener("click", (e) => {
   // PUT
 
   if (editBtn) {
+    nameBox.classList.add("visually-hidden");
     const parent = e.target.parentElement;
     let titleContent = parent.querySelector(".card-title").textContent;
     let bodyContent = parent.querySelector(".card-text").textContent;
