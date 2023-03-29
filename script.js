@@ -4,7 +4,8 @@ const postsList = document.querySelector(".posts-list");
 const addPostForm = document.querySelector(".add-post-form");
 const title = document.getElementById("title-value");
 const body = document.getElementById("body-value");
-const publish = document.querySelector(".btn");
+const publish = document.getElementById("publishbtn");
+const edit = document.getElementById("editbtn");
 const spinner = document.querySelector(".spinner");
 const names = document.getElementById("name-value");
 
@@ -104,7 +105,7 @@ function post() {
     .catch((error) => console.log(error));
 }
 
-addPostForm.addEventListener("submit", (e) => {
+publish.addEventListener("click", (e) => {
   e.preventDefault();
   checkName();
 });
@@ -143,7 +144,7 @@ postsList.addEventListener("click", (e) => {
     body.value = bodyContent;
   }
 
-  publish.addEventListener("click", (e) => {
+  edit.addEventListener("click", (e) => {
     e.preventDefault();
 
     fetch(`${url}/${id}`, {
@@ -182,6 +183,7 @@ function checkName() {
       if (existName === undefined) {
         alert("please sign up");
         publish.disabled = true;
+        location.reload();
       } else {
         publish.disabled = false;
         post();
