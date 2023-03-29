@@ -160,5 +160,3 @@ postsList.addEventListener("click", (e) => {
       .catch((error) => console.log(error));
   });
 });
-
-// GET by ID
