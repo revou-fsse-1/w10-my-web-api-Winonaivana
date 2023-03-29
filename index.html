@@ -14,13 +14,19 @@
   </head>
   <body class="bg-black">
     <div class="container">
-      <button onclick="login()" class="btn btn-danger mt-3 mb-2">Login</button>
+      <button onclick="signup()" class="btn btn-danger mt-3 mb-2">
+        Sign Up
+      </button>
       <div class="row mt-5 border border-4 rounded-4">
         <div class="col-md-6">
           <h1 class="text-white mt-2">Spill it!</h1>
           <form class="add-post-form mt-5">
-            <div class="form-group">
-              <label for="title" class="text-white mb-4"
+            <div>
+              <label for="body" class="text-white mb-4">Username</label>
+              <input type="text" class="form-control" id="name-value" />
+            </div>
+            <div>
+              <label for="title" class="text-white mb-4 mt-4"
                 >Who is this about?</label
               >
               <input type="text" class="form-control" id="title-value" />

@@ -1,10 +1,12 @@
 const url = "https://6421b41286992901b2ba38ac.mockapi.io/postList/";
+const url2 = "https://6421b41286992901b2ba38ac.mockapi.io/users/";
 const postsList = document.querySelector(".posts-list");
 const addPostForm = document.querySelector(".add-post-form");
 const title = document.getElementById("title-value");
 const body = document.getElementById("body-value");
 const publish = document.querySelector(".btn");
 const spinner = document.querySelector(".spinner");
+const names = document.getElementById("name-value");
 
 const showPost = (posts) => {
   posts.forEach((post) => {
@@ -79,9 +81,7 @@ display();
 
 // POST
 
-addPostForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
+function post() {
   fetch(url, {
     method: "POST",
     headers: {
@@ -102,6 +102,11 @@ addPostForm.addEventListener("submit", (e) => {
       location.reload();
     })
     .catch((error) => console.log(error));
+}
+
+addPostForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  checkName();
 });
 
 // DELETE
@@ -160,3 +165,26 @@ postsList.addEventListener("click", (e) => {
       .catch((error) => console.log(error));
   });
 });
+
+// login
+function signup() {
+  window.location.href = "register.html";
+}
+
+function checkName() {
+  fetch(url2)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      let existName = data.find((e) => e.name === names.value);
+
+      if (existName === undefined) {
+        alert("please sign up");
+        publish.disabled = true;
+      } else {
+        publish.disabled = false;
+        post();
+      }
+    });
+}
