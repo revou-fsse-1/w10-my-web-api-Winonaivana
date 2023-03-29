@@ -1,4 +1,4 @@
-const email = document.getElementById("emailInput");
+const names = document.getElementById("nameInput");
 const password = document.getElementById("passwordInput");
 const url = "https://6421b41286992901b2ba38ac.mockapi.io/users/";
 
@@ -8,7 +8,7 @@ function validate() {
       return res.json();
     })
     .then((data) => {
-      let existEmail = data.find((e) => e.name === email.value);
+      let existEmail = data.find((e) => e.name === names.value);
       let existPass = data.find((e) => e.password === password.value);
 
       if (existEmail === undefined || existPass === undefined) {
@@ -23,7 +23,7 @@ function validate() {
 }
 
 function checkEmpty() {
-  if (email.value == 0) {
+  if (names.value == 0) {
     alert("Please fill in email");
   } else if (password.value == 0) {
     alert("Please fill in password");

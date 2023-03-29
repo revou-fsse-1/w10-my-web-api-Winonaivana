@@ -11,7 +11,8 @@ function addUser() {
     },
     body: JSON.stringify({
       password: password.value,
-      name: email.value,
+      email: email.value,
+      name: names.value,
     }),
   })
     .then((res) => {
