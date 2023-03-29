@@ -1,9 +1,10 @@
-const url = "https://6421b41286992901b2ba38ac.mockapi.io/postList";
+const url = "https://6421b41286992901b2ba38ac.mockapi.io/postList/";
 const postsList = document.querySelector(".posts-list");
 const addPostForm = document.querySelector(".add-post-form");
 const title = document.getElementById("title-value");
 const body = document.getElementById("body-value");
 const publish = document.querySelector(".btn");
+const spinner = document.querySelector(".spinner");
 
 const showPost = (posts) => {
   posts.forEach((post) => {
@@ -52,15 +53,29 @@ const showPost = (posts) => {
   });
 };
 
-fetch(url)
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    showPost(data);
-  })
+function showSpinner() {
+  spinner.classList.remove("visually-hidden");
+}
 
-  .catch((error) => console.log(error));
+function hideSpinner() {
+  spinner.classList.add("visually-hidden");
+}
+
+function display() {
+  showSpinner();
+  fetch(url)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      hideSpinner();
+      showPost(data);
+    })
+
+    .catch((error) => console.log(error));
+}
+
+display();
 
 // POST
 
@@ -85,7 +100,8 @@ addPostForm.addEventListener("submit", (e) => {
       dataArray.push(data);
       showPost(dataArray);
       location.reload();
-    });
+    })
+    .catch((error) => console.log(error));
 });
 
 // DELETE
@@ -107,7 +123,8 @@ postsList.addEventListener("click", (e) => {
       })
       .then(() => {
         location.reload();
-      });
+      })
+      .catch((error) => console.log(error));
   }
 
   // PUT
@@ -139,6 +156,9 @@ postsList.addEventListener("click", (e) => {
       })
       .then(() => {
         location.reload();
-      });
+      })
+      .catch((error) => console.log(error));
   });
 });
+
+// GET by ID
