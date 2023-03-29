@@ -8,7 +8,7 @@ function validate() {
       return res.json();
     })
     .then((data) => {
-      let existEmail = data.find((e) => e.email === email.value);
+      let existEmail = data.find((e) => e.name === email.value);
       let existPass = data.find((e) => e.password === password.value);
 
       if (existEmail === undefined || existPass === undefined) {
