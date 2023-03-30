@@ -59,6 +59,8 @@ const showPost = (posts) => {
   });
 };
 
+// Loading spinner
+
 function showSpinner() {
   spinner.classList.remove("visually-hidden");
 }
@@ -66,6 +68,8 @@ function showSpinner() {
 function hideSpinner() {
   spinner.classList.add("visually-hidden");
 }
+
+// Fetch API and display in HTML
 
 function display() {
   showSpinner();
@@ -171,26 +175,24 @@ postsList.addEventListener("click", (e) => {
   });
 });
 
-// login
+// Redirect to sign up page
 function signup() {
   window.location.href = "register.html";
 }
 
-function checkName() {
-  fetch(url2)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      let existName = data.find((e) => e.name === names.value);
+const usersData = localStorage.getItem("users");
+const users = JSON.parse(usersData);
 
-      if (existName === undefined) {
-        alert("please sign up");
-        publish.disabled = true;
-        location.reload();
-      } else {
-        publish.disabled = false;
-        post();
-      }
-    });
+// Function to check if username exist in local storage
+
+function checkName() {
+  const check = users.find((a) => a.name === names.value);
+  if (check === undefined) {
+    alert("Please sign up");
+    publish.disabled = true;
+    location.reload();
+  } else {
+    publish.disabled = false;
+    post();
+  }
 }
