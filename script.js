@@ -180,11 +180,9 @@ function signup() {
   window.location.href = "register.html";
 }
 
+// Function to check if username exist in local storage
 const usersData = localStorage.getItem("users");
 const users = JSON.parse(usersData);
-
-// Function to check if username exist in local storage
-
 function checkName() {
   const check = users.find((a) => a.name === names.value);
   if (check === undefined) {

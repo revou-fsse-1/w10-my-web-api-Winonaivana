@@ -3,6 +3,10 @@ const names = document.getElementById("nameInput");
 const password = document.getElementById("passwordInput");
 const url = "https://6421b41286992901b2ba38ac.mockapi.io/users/";
 
+const usersData = localStorage.getItem("users");
+const users = JSON.parse(usersData) || [{ name: "hello", password: "hello" }];
+localStorage.setItem("users", JSON.stringify(users));
+
 function addUser() {
   fetch(url, {
     method: "POST",
@@ -38,6 +42,12 @@ function checkIfSame() {
         addUser();
         alert("Success, Please try to login now");
         window.location.href = "login.html";
+        users.push({
+          name: names.value,
+          password: password.value,
+        });
+
+        localStorage.setItem("users", JSON.stringify(users));
       }
     });
 }

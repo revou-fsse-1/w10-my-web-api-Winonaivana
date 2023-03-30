@@ -3,32 +3,19 @@ const password = document.getElementById("passwordInput");
 const url = "https://6421b41286992901b2ba38ac.mockapi.io/users/";
 
 const usersData = localStorage.getItem("users");
-const users = JSON.parse(usersData) || [{ name: "hello", password: "hello" }];
-localStorage.setItem("users", JSON.stringify(users));
+const users = JSON.parse(usersData);
 
 function validate() {
-  fetch(url)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      let existName = data.find((e) => e.name === names.value);
-      let existPass = data.find((e) => e.password === password.value);
-
-      if (existName === undefined || existPass === undefined) {
-        alert("Invalid");
-      } else if (existName !== existPass) {
-        alert("Invalid");
-      } else {
-        alert("yay");
-        window.location.href = "index.html";
-        users.push({
-          name: names.value,
-          password: password.value,
-        });
-        localStorage.setItem("users", JSON.stringify(users));
-      }
-    });
+  const check = users.find(
+    (a) => a.name === names.value && a.password === password.value
+  );
+  if (check === undefined) {
+    alert("Please sign up");
+    location.reload();
+  } else {
+    alert("Login successful");
+    window.location.href = "index.html";
+  }
 }
 
 function checkEmpty() {
