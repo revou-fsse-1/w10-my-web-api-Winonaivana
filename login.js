@@ -35,3 +35,7 @@ function checkEmpty() {
 function login() {
   checkEmpty();
 }
+
+function signup() {
+  window.location.href = "register.html";
+}
