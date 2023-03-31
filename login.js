@@ -19,23 +19,6 @@ function validate() {
   }
 }
 
-function validate1() {
-  fetch(url)
-    .then((response) => response.json())
-    .then((user) => {
-      let existEmail = user.find((e) => e.name === names.value);
-      let existPassword = user.find((e) => e.password === password.value);
-    });
-
-  if (existEmail === undefined || existPassword === undefined) {
-    alert("invalid");
-  } else if (existEmail !== existPassword) {
-    alert("invalid");
-  } else {
-    alert("success");
-  }
-}
-
 function checkIfSame() {
   fetch(url)
     .then((res) => {

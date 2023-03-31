@@ -34,9 +34,13 @@ function checkIfSame() {
     })
     .then((data) => {
       let existEmail = data.find((e) => e.email === email.value);
+      let existName = data.find((e) => e.name === names.value);
 
       if (existEmail !== undefined) {
         alert("email already exist girl");
+        location.reload();
+      } else if (existName !== undefined) {
+        alert("name already exist girl");
         location.reload();
       } else {
         addUser();
@@ -44,7 +48,6 @@ function checkIfSame() {
         window.location.href = "login.html";
         users.push({
           name: names.value,
-          password: password.value,
         });
 
         localStorage.setItem("users", JSON.stringify(users));
