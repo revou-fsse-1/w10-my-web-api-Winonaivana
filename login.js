@@ -6,20 +6,8 @@ const usersData = localStorage.getItem("users");
 const users = JSON.parse(usersData);
 localStorage.setItem("users", JSON.stringify(users));
 
-function validate() {
-  const check = users.find(
-    (a) => a.name === names.value && a.password === password.value
-  );
-  if (check === undefined) {
-    alert("Please sign up");
-    location.reload();
-  } else {
-    alert("Login successful");
-    window.location.href = "index.html";
-  }
-}
-
 function checkIfSame() {
+  const check = users.find((a) => a.name === names.value);
   fetch(url)
     .then((res) => {
       return res.json();
@@ -33,14 +21,15 @@ function checkIfSame() {
         location.reload();
       } else if (existName !== existPassword) {
         alert("invalid");
-      } else {
-        alert("Success");
-        window.location.href = "index.html";
+      } else if (existName !== undefined && check === undefined) {
         users.push({
           name: names.value,
         });
 
         localStorage.setItem("users", JSON.stringify(users));
+      } else {
+        alert("Success");
+        window.location.href = "index.html";
       }
     });
 }
